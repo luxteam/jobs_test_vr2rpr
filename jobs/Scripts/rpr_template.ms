@@ -17,7 +17,7 @@ function main = (
 
         renderers.current = Radeon_ProRender()
         renderers.current.renderLimit = 1
-        renderers.current.passLimit = 2
+        renderers.current.passLimit = 300
 
         rendered_image_path = "{output_path}" + "\\converted_" + maxFileName + ".png"
         render outputfile:rendered_image_path

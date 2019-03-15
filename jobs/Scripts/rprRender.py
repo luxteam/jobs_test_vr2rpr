@@ -94,12 +94,12 @@ def main():
         file.write(cmdRun)
 
     os.chdir(args.output_dir)
-    p = psutil.Popen(cmd_script_path, stdout=subprocess.PIPE)
-    rs = -1
+    p = psutil.Popen(cmd_script_path, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    rc = -1
 
     while True:
         try:
-            rc = p.wait(timeout=60)
+            rc = p.communicate(timeout=60)
         except psutil.TimeoutExpired as err:
             fatal_errors_titles = ['Radeon ProRender', 'AMD Radeon ProRender debug assert',
                                    maxScriptPath + ' - MAXScript', '3ds Max', 'Microsoft Visual C++ Runtime Library',
