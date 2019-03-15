@@ -73,8 +73,8 @@ def main():
 
     tests = ", ".join(['"{}"'.format(x['name']) for x in tests_list if x['status'] == 'active'])
     with open(os.path.join(os.path.dirname(__file__), 'vray_template.ms'), 'r') as file:
-        ms_script = file.read().format(scene_list=tests, output_path=os.path.normpath(os.path.join(args.output_dir, 'Color')).replace('\\', '/'),
-                                       res_path=os.path.normpath(args.assets_path.replace('\\', '/')))
+        ms_script = file.read().format(scene_list=tests, output_path=os.path.normpath(os.path.join(args.output_dir, 'Color')).replace('\\', '\\\\'),
+                                       res_path=os.path.normpath(args.assets_path.replace('\\', '\\\\')))
     with open(os.path.join(args.output_dir, 'render_vray_script.ms'), 'w') as file:
         file.write(ms_script)
     cmd_script_path = os.path.join(args.output_dir, 'run_vray.bat')
