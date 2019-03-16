@@ -91,7 +91,7 @@ def main():
     while True:
         try:
             rc = p.communicate(timeout=60)
-        except psutil.TimeoutExpired as err:
+        except (subprocess.TimeoutExpired, psutil.TimeoutExpired) as err:
             fatal_errors_titles = [maxScriptPath + ' - MAXScript', '3ds Max', 'Microsoft Visual C++ Runtime Library',
                                    '3ds Max Error Report', '3ds Max application', 'Image I/O Error']
             if set(fatal_errors_titles).intersection(get_windows_titles()):
