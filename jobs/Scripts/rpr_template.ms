@@ -1,3 +1,5 @@
+global autoLaunch = "true"
+
 include "vray2rpr.ms"
 resetMaxFile #noPrompt
 SetQuietMode true
