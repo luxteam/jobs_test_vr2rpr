@@ -1,10 +1,10 @@
 [
-  {"name": "01_volvo.max", "status": "active"},
+  {"name": "01_volvo.max", "status": "loadingerror"},
   {"name": "02_ikea.max", "status": "active"},
   {"name": "03_laptop.max", "status": "active"},
   {"name": "04_astonmartin.max", "status": "active"},
   {"name": "05_ironman.max", "status": "active"},
-  {"name": "06_civic.max", "status": "active"},
+  {"name": "06_civic.max", "status": "unabletoconvert"},
   {"name": "07_lambo.max", "status": "active"},
   {"name": "08_interior.max", "status": "active"},
   {"name": "09_materials.max", "status": "active"},
