@@ -10,7 +10,7 @@
   {"name": "09_materials.max", "status": "active"},
   {"name": "10_bump.max", "status": "active"},
   {"name": "AI40_001.max", "status": "active"},
-  {"name": "AI40_002.max", "status": "active"},
+  {"name": "AI40_002.max", "status": "error"},
   {"name": "AI40_003.max", "status": "active"},
   {"name": "AI40_004.max", "status": "active"},
   {"name": "AI40_005.max", "status": "active"},
