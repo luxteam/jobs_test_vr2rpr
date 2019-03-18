@@ -80,6 +80,7 @@ def main():
                 json.dump([case_report], file, indent=4)
 
     tests = ", ".join(['"{}"'.format(x['name']) for x in tests_list if x['status'] == 'active'])
+    conversionScriptPath = os.path.abspath(os.path.join(args.output_dir, 'vray2rpr.ms'))
     shutil.copyfile(os.path.join(os.path.dirname(__file__), 'vray2rpr.ms'), os.path.join(args.output_dir, 'vray2rpr.ms'))
     with open(os.path.join(os.path.dirname(__file__), 'rpr_template.ms'), 'r') as file:
         ms_script = file.read().format(scene_list=tests, output_path=os.path.normpath(os.path.join(args.output_dir, 'Color')).replace('\\', '\\\\'),
@@ -87,7 +88,7 @@ def main():
     with open(os.path.join(args.output_dir, 'render_rpr_script.ms'), 'w') as file:
         file.write(ms_script)
     cmd_script_path = os.path.join(args.output_dir, 'run_rpr.bat')
-    maxScriptPath = os.path.join(args.output_dir, 'render_rpr_script.ms')
+    maxScriptPath = os.path.abspath(os.path.join(args.output_dir, 'render_rpr_script.ms'))
     cmdRun = '"{tool}" -U MAXScript "{job_script}" -silent'. \
         format(tool=args.app_path, job_script=os.path.join(args.output_dir, 'render_rpr_script.ms'))
     with open(os.path.join(args.output_dir, 'run_rpr.bat'), 'w') as file:
@@ -102,6 +103,7 @@ def main():
             rc = p.communicate(timeout=60)
         except (subprocess.TimeoutExpired, psutil.TimeoutExpired) as err:
             fatal_errors_titles = ['Radeon ProRender', 'AMD Radeon ProRender debug assert',
+                                   conversionScriptPath + ' - MAXScript',
                                    maxScriptPath + ' - MAXScript', '3ds Max', 'Microsoft Visual C++ Runtime Library',
                                    '3ds Max Error Report', '3ds Max application', 'Radeon ProRender Error',
                                    'Image I/O Error']

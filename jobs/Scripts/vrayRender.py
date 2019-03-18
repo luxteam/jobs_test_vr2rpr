@@ -78,7 +78,7 @@ def main():
     with open(os.path.join(args.output_dir, 'render_vray_script.ms'), 'w') as file:
         file.write(ms_script)
     cmd_script_path = os.path.join(args.output_dir, 'run_vray.bat')
-    maxScriptPath = os.path.join(args.output_dir, 'render_vray_script.ms')
+    maxScriptPath = os.path.abspath(os.path.join(args.output_dir, 'render_vray_script.ms'))
     cmdRun = '"{tool}" -U MAXScript "{job_script}" -silent'. \
         format(tool=args.app_path, job_script=os.path.join(args.output_dir, 'render_vray_script.ms'))
     with open(os.path.join(args.output_dir, 'run_vray.bat'), 'w') as file:
