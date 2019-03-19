@@ -17,7 +17,6 @@ function main = (
 
         convertScene()
 
-        renderers.current = Radeon_ProRender()
         renderers.current.renderLimit = 1
         renderers.current.passLimit = 300
 
