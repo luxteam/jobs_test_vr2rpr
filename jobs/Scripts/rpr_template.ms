@@ -21,7 +21,7 @@ function main = (
         renderers.current.renderLimit = 1
         renderers.current.passLimit = 300
 
-        rendered_image_path = "{output_path}" + "\\converted_" + maxFileName + ".png"
+        rendered_image_path = "{output_path}" + "\\converted_" + maxFileName + ".jpg"
         render outputfile:rendered_image_path
     )
 )

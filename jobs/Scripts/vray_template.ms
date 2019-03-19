@@ -25,7 +25,7 @@ function main = (
         --vr.system_vrayLog_level = 1
         --vr.output_fileOnly = true
         --vr.system_vrayLog_show = 0
-        rendered_image_path = "{output_path}" + "\\" + maxFileName + ".png"
+        rendered_image_path = "{output_path}" + "\\" + maxFileName + ".jpg"
         render outputfile:rendered_image_path
     )
 )
