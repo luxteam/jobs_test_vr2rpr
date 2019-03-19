@@ -70,9 +70,9 @@ def main():
                 pass
             case_report.update({
                 "test_case": test['name'],
-                "file_name": "converted_" + test['name'] + ".png",
+                "file_name": "converted_" + test['name'] + ".jpg",
                 "test_status": "passed",
-                "render_color_path": "Color/" + "converted_" + test['name'] + ".png",
+                "render_color_path": "Color/" + "converted_" + test['name'] + ".jpg",
                 "tool": "3ds Max 2018"
             })
 

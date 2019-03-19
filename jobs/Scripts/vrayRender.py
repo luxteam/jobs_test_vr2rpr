@@ -63,7 +63,7 @@ def main():
         if test['status'] == 'active':
             case_report = RENDER_REPORT_BASE
             case_report.update({
-                "original_color_path": "Color/" + test['name'] + '.png',
+                "original_color_path": "Color/" + test['name'] + '.jpg',
                 "original_render_log": test['name'] + '.or.log',
                 "render_device": cpuinfo.get_cpu_info()['brand']
             })
