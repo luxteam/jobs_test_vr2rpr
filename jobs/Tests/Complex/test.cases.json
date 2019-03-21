@@ -8,6 +8,8 @@
   {"name": "07_lambo.max", "status": "active"},
   {"name": "08_materials.max", "status": "active"},
   {"name": "09_bump.max", "status": "active"},
+  {"name": "10_interior.max", "status": "active"},
+  {"name": "11_spaceship.max", "status": "active"},
   {"name": "AI40_001.max", "status": ""},
   {"name": "AI40_002.max", "status": ""},
   {"name": "AI40_003.max", "status": ""},
