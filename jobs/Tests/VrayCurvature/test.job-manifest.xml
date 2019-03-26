@@ -3,17 +3,17 @@
 
     <outpath value="{OutputDir}"/>
 
-    <execute command='python "{ResourcesDir}\\vrayRender.py"' timeout="6000">
-        <argument>--tests_list "{Root}\\Tests\\VrayCarPaint\\test.cases.json"</argument>
+    <execute command='python "{ResourcesDir}\\vrayRender.py"' timeout="100000">
+        <argument>--tests_list "{Root}\\Tests\\VrayCurvature\\test.cases.json"</argument>
         <argument>--app_path "{Tool}"</argument>
-        <argument>--assets_path "{ScenesDir}\\VrayCarPaint"</argument>
+        <argument>--assets_path "{ScenesDir}\\Utilites\\VrayCurvature"</argument>
         <argument>--output_dir "{OutputDir}"</argument>
     </execute>
 
-    <execute command='python "{ResourcesDir}\\rprRender.py"' timeout="12000">
-        <argument>--tests_list "{Root}\\Tests\\VrayCarPaint\\test.cases.json"</argument>
+    <execute command='python "{ResourcesDir}\\rprRender.py"' timeout="100000">
+        <argument>--tests_list "{Root}\\Tests\\VrayCurvature\\test.cases.json"</argument>
         <argument>--app_path "{Tool}"</argument>
-        <argument>--assets_path "{ScenesDir}\\VrayCarPaint"</argument>
+        <argument>--assets_path "{ScenesDir}\\Utilites\\VrayCurvature"</argument>
         <argument>--output_dir "{OutputDir}"</argument>
     </execute>
 
@@ -23,7 +23,7 @@
 
     <execute command='python "{CommonDir}/scripts/ImageComparator/compareByJSON.py"'>
         <argument>--work_dir "{OutputDir}"</argument>
-        <argument>--base_dir "{BaselineDir}/VrayCarPaint"</argument>
+        <argument>--base_dir "{BaselineDir}/VrayCurvature"</argument>
         <argument>--case_suffix _VR.json</argument>
     </execute>
 

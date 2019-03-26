@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<job-manifest name="Smoke">
+
+    <outpath value="{OutputDir}"/>
+
+    <execute command='python "{ResourcesDir}\\vrayRender.py"' timeout="6000">
+        <argument>--tests_list "{Root}\\Tests\\VrayScatterVolume\\test.cases.json"</argument>
+        <argument>--app_path "{Tool}"</argument>
+        <argument>--assets_path "{ScenesDir}\\VrayScatterVolume"</argument>
+        <argument>--output_dir "{OutputDir}"</argument>
+    </execute>
+
+    <execute command='python "{ResourcesDir}\\rprRender.py"' timeout="12000">
+        <argument>--tests_list "{Root}\\Tests\\VrayScatterVolume\\test.cases.json"</argument>
+        <argument>--app_path "{Tool}"</argument>
+        <argument>--assets_path "{ScenesDir}\\VrayScatterVolume"</argument>
+        <argument>--output_dir "{OutputDir}"</argument>
+    </execute>
+
+    <execute command='python "{CWD}/Scripts/make_report_json.py"'>
+        <argument>--work_dir "{OutputDir}"</argument>
+    </execute>
+
+    <execute command='python "{CommonDir}/scripts/ImageComparator/compareByJSON.py"'>
+        <argument>--work_dir "{OutputDir}"</argument>
+        <argument>--base_dir "{BaselineDir}/VrayScatterVolume"</argument>
+        <argument>--case_suffix _VR.json</argument>
+    </execute>
+
+</job-manifest>
