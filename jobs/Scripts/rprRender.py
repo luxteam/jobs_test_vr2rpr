@@ -73,7 +73,7 @@ def main():
                 "file_name": "converted_" + test['name'] + ".jpg",
                 "test_status": "passed",
                 "render_color_path": "Color/" + "converted_" + test['name'] + ".jpg",
-                "tool": "3ds Max 2018"
+                "tool": "3ds Max 2019"
             })
 
             with open(os.path.join(args.output_dir, test['name'] + '_RPR.json'), 'w') as file:
