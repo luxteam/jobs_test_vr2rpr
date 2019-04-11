@@ -4,15 +4,23 @@ logsystem.logName "renderVray.log"
 units.SystemType = #Meters
 
 function main = (
+    vray_cpu = V_Ray_Next__update_1_2()
+    vray_gpu = V_Ray_GPU_Next__update_1_2()
+
     filesToRender = #(
         {scene_list}
+    )
+
+    renderersForFiles = #(
+        {render_list}
     )
 
     for fi=1 to filesToRender.count do (
         scene_path = "{res_path}" + "\\" + filesToRender[fi]
         loadMaxFile scene_path useFileUnits:true quiet:true
 
-        renderers.current = V_Ray_Next__update_1_2()
+        renderers.current = renderersForFiles[i]
+
         vr = renderers.current
         setVRaySilentMode()
 
