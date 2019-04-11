@@ -19,7 +19,7 @@ function main = (
         scene_path = "{res_path}" + "\\" + filesToRender[fi]
         loadMaxFile scene_path useFileUnits:true quiet:true
 
-        renderers.current = renderersForFiles[i]
+        renderers.current = renderersForFiles[fi]
 
         vr = renderers.current
         setVRaySilentMode()
