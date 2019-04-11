@@ -67,6 +67,8 @@ def main():
                 "original_render_log": test['name'] + '.or.log',
                 "render_device": cpuinfo.get_cpu_info()['brand']
             })
+        if 'renderer' not in test.keys():
+            test.update({'renderer': 'vray_cpu'})
 
             with open(os.path.join(args.output_dir, test['name'] + '_VR.json'), 'w') as file:
                 json.dump([case_report], file, indent=4)
