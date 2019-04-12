@@ -18,6 +18,7 @@ function main = (
     for fi=1 to filesToRender.count do (
         scene_path = "{res_path}" + "\\" + filesToRender[fi]
         loadMaxFile scene_path useFileUnits:true quiet:true
+        sleep 30
 
         renderers.current = renderersForFiles[fi]
 
