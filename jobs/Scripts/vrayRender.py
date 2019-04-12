@@ -48,8 +48,6 @@ def createArgsParser():
 def main():
     args = createArgsParser().parse_args()
 
-    tests_list = {}
-    scene_list = ''
     with open(args.tests_list, 'r') as file:
         tests_list = json.loads(file.read())
 
@@ -61,30 +59,41 @@ def main():
 
     for test in tests_list:
         if test['status'] == 'active':
+            if 'renderer' not in test.keys():
+                test.update({'renderer': 'vray_cpu'})
+
             case_report = RENDER_REPORT_BASE
             case_report.update({
+                "test_case": test['name'],
                 "original_color_path": "Color/" + test['name'] + '.jpg',
                 "original_render_log": test['name'] + '.or.log',
-                "render_device": cpuinfo.get_cpu_info()['brand']
+                "render_device": cpuinfo.get_cpu_info()['brand'],
+                "file_name": test['name'] + '.jpg',
+                "scene_name": test['name']
             })
-        if 'renderer' not in test.keys():
-            test.update({'renderer': 'vray_cpu'})
 
             with open(os.path.join(args.output_dir, test['name'] + '_VR.json'), 'w') as file:
                 json.dump([case_report], file, indent=4)
 
     tests = ", ".join(['"{}"'.format(x['name']) for x in tests_list if x['status'] == 'active'])
     renderers = ", ".join(['{}'.format(x['renderer']) for x in tests_list if x['status'] == 'active'])
+
     with open(os.path.join(os.path.dirname(__file__), 'vray_template.ms'), 'r') as file:
-        ms_script = file.read().format(scene_list=tests, render_list=renderers, output_path=os.path.normpath(os.path.join(args.output_dir, 'Color')).replace('\\', '\\\\'),
+        ms_script = file.read().format(scene_list=tests,
+                                       render_list=renderers,
+                                       output_path=os.path.normpath(args.output_dir).replace('\\', '\\\\'),
                                        res_path=os.path.normpath(args.assets_path.replace('\\', '\\\\')))
+
     with open(os.path.join(args.output_dir, 'render_vray_script.ms'), 'w') as file:
         file.write(ms_script)
+
     cmd_script_path = os.path.join(args.output_dir, 'run_vray.bat')
     maxScriptPath = os.path.abspath(os.path.join(args.output_dir, 'render_vray_script.ms'))
+
     cmdRun = '"{tool}" -U MAXScript "{job_script}" -silent'. \
         format(tool=args.app_path, job_script=os.path.join(args.output_dir, 'render_vray_script.ms'))
-    with open(os.path.join(args.output_dir, 'run_vray.bat'), 'w') as file:
+
+    with open(cmd_script_path, 'w') as file:
         file.write(cmdRun)
 
     os.chdir(args.output_dir)
@@ -109,6 +118,7 @@ def main():
                 p.terminate()
                 break
         else:
+            rc = 0
             break
 
     return rc
