@@ -121,6 +121,29 @@ def main():
             rc = 0
             break
 
+    # parse Vray version and render time
+    # [2019/Apr/12|18:47:18]   Total sequence time: 62.4 s
+    # [2019/Apr/12|18:43:59] Console created, V-Ray 4.10.03.00001 for x64 from Mar 25 2019, 18:55:53
+    render_time_line_key = 'Total sequence time: '
+    vray_version_line_key = 'Console created, V-Ray '
+    for test in tests_list:
+        if test['status'] == 'active':
+            if os.path.exists(os.path.join(args.output_dir, test['name'] + 'or.log')):
+                try:
+                    with open(os.path.join(args.output_dir, test['name'] + 'or.log'), 'r') as file:
+                        for line in file.readlines():
+                            if render_time_line_key in line:
+                                time_s = line.split(render_time_line_key)[-1].replace('\n', '').replace('\r', '')
+                            if vray_version_line_key in line:
+                                version_s = line.split(vray_version_line_key)[-1].split(' for')[0]
+                                with open(os.path.join(args.output_dir, test['name'] + '_VR.json'), 'r') as case_file:
+                                    case_report = json.load(case_file.read())
+                                case_report.update({"or_version": version_s})
+                                with open(os.path.join(args.output_dir, test['name'] + '_VR.json'), 'w') as case_file:
+                                    json.dump(case_report, case_file)
+                except Exception as err:
+                    main_logger.error("Error {} during Vray log parsing: {}".format(str(err), test['name'] + 'or.log'))
+
     return rc
 
 
