@@ -4,7 +4,6 @@ import os
 import subprocess
 import psutil
 import json
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir, os.path.pardir)))
 from jobs_launcher.core.config import main_logger
 from jobs_launcher.core.config import RENDER_REPORT_BASE
@@ -48,8 +47,6 @@ def createArgsParser():
 def main():
     args = createArgsParser().parse_args()
 
-    tests_list = {}
-    scene_list = ''
     with open(args.tests_list, 'r') as file:
         tests_list = json.loads(file.read())
 
@@ -67,7 +64,7 @@ def main():
                 stdout = s.communicate()
                 case_report.update({'render_device': stdout[0].decode("utf-8").split('\n')[1].replace('\r', '').strip(' ')})
             except:
-                pass
+                main_logger.warning("Can't get GPU name by wmic")
             case_report.update({
                 "test_case": test['name'],
                 "file_name": "converted_" + test['name'] + ".jpg",
@@ -119,7 +116,22 @@ def main():
                 p.terminate()
                 break
         else:
+            rc = 0
             break
+
+    for test in tests_list:
+        if test['status'] == 'active':
+            if os.path.exists(os.path.join(args.output_dir, test['name'] + '.render_time.log')):
+                try:
+                    with open(os.path.join(args.output_dir, test['name'] + '.render_time.log'), 'r') as file:
+                        time = file.read()
+                        with open(os.path.join(args.output_dir, test['name'] + '_RPR.json'), 'r') as case_file:
+                            temp_case_report = json.loads(case_file.read())
+                        temp_case_report[0].update({"render_time": float(time)})
+                        with open(os.path.join(args.output_dir, test['name'] + '_RPR.json'), 'w') as case_file:
+                            json.dump(temp_case_report, case_file, indent=4)
+                except Exception as err:
+                    main_logger.error("Error {} during Vray log parsing: {}".format(str(err), test['name'] + '.render_time.log'))
 
     return rc
 
