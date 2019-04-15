@@ -128,21 +128,26 @@ def main():
     vray_version_line_key = 'Console created, V-Ray '
     for test in tests_list:
         if test['status'] == 'active':
-            if os.path.exists(os.path.join(args.output_dir, test['name'] + 'or.log')):
+            if os.path.exists(os.path.join(args.output_dir, test['name'] + '.or.log')):
                 try:
-                    with open(os.path.join(args.output_dir, test['name'] + 'or.log'), 'r') as file:
+                    with open(os.path.join(args.output_dir, test['name'] + '.or.log'), 'r') as file:
                         for line in file.readlines():
                             if render_time_line_key in line:
                                 time_s = line.split(render_time_line_key)[-1].replace('\n', '').replace('\r', '')
+                                with open(os.path.join(args.output_dir, test['name'] + '_VR.json'), 'r') as case_file:
+                                    temp_case_report = json.loads(case_file.read())
+                                temp_case_report[0].update({"or_render_time": time_s})
+                                with open(os.path.join(args.output_dir, test['name'] + '_VR.json'), 'w') as case_file:
+                                    json.dump(temp_case_report, case_file, indent=4)
                             if vray_version_line_key in line:
                                 version_s = line.split(vray_version_line_key)[-1].split(' for')[0]
                                 with open(os.path.join(args.output_dir, test['name'] + '_VR.json'), 'r') as case_file:
-                                    case_report = json.load(case_file.read())
-                                case_report.update({"or_version": version_s})
+                                    temp_case_report = json.loads(case_file.read())
+                                temp_case_report[0].update({"or_version": version_s})
                                 with open(os.path.join(args.output_dir, test['name'] + '_VR.json'), 'w') as case_file:
-                                    json.dump(case_report, case_file)
+                                    json.dump(temp_case_report, case_file, indent=4)
                 except Exception as err:
-                    main_logger.error("Error {} during Vray log parsing: {}".format(str(err), test['name'] + 'or.log'))
+                    main_logger.error("Error {} during Vray log parsing: {}".format(str(err), test['name'] + '.or.log'))
 
     return rc
 
