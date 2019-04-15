@@ -136,7 +136,7 @@ def main():
                                 time_s = line.split(render_time_line_key)[-1].replace('\n', '').replace('\r', '')
                                 with open(os.path.join(args.output_dir, test['name'] + '_VR.json'), 'r') as case_file:
                                     temp_case_report = json.loads(case_file.read())
-                                temp_case_report[0].update({"render_time": time_s})
+                                temp_case_report[0].update({"render_time": float(time_s.split(" ")[0])})
                                 with open(os.path.join(args.output_dir, test['name'] + '_VR.json'), 'w') as case_file:
                                     json.dump(temp_case_report, case_file, indent=4)
                             if vray_version_line_key in line:
