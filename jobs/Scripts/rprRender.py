@@ -50,11 +50,12 @@ def main():
     with open(args.tests_list, 'r') as file:
         tests_list = json.loads(file.read())
 
-    try:
-        os.makedirs(os.path.join(args.output_dir, 'Color'))
-    except OSError as err:
-        main_logger.error(str(err))
-        return 1
+    if not os.path.exists(os.path.join(args.output_dir, 'Color')):
+        try:
+            os.makedirs(os.path.join(args.output_dir, 'Color'))
+        except OSError as err:
+            main_logger.error(str(err))
+            return 1
 
     for test in tests_list:
         if test['status'] == 'active':
