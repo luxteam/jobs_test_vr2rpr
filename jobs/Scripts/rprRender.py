@@ -66,6 +66,7 @@ def main():
                 case_report.update({'render_device': stdout[0].decode("utf-8").split('\n')[1].replace('\r', '').strip(' ')})
             except:
                 main_logger.warning("Can't get GPU name by wmic")
+            # TODO: fill empty fileds
             case_report.update({
                 "test_case": test['name'],
                 "file_name": "converted_" + test['name'] + ".jpg",

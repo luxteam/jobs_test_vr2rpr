@@ -63,6 +63,7 @@ def main():
                 test.update({'renderer': 'vray_cpu'})
 
             case_report = RENDER_REPORT_BASE
+            # TODO: fill empty fileds
             case_report.update({
                 "test_case": test['name'],
                 "original_color_path": "Color/" + test['name'] + '.jpg',

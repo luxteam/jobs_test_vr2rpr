@@ -9,6 +9,7 @@ parser.add_argument('--work_dir', required=True)
 args = parser.parse_args()
 directory = args.work_dir
 
+# TODO: assemble report.json with RPR and VR renderers
 files = os.listdir(directory)
 json_files = list(filter(lambda x: x.endswith('RPR.json'), files))
 # build report.json if was launched render_ai.bat
