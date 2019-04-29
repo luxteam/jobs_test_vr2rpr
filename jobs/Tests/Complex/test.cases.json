@@ -11,7 +11,7 @@
   {"name": "10_interior.max", "status": "", "renderer": "vray_cpu"},
   {"name": "11_spaceship.max", "status": "active", "renderer": "vray_cpu"},
   {"name": "12_ies.max", "status": "ERROR", "renderer": "vray_gpu"},
-  {"name": "13_fast_sss.max", "status": "", "renderer": "vray_cpu"},
+  {"name": "13_fast_sss.max", "status": "activate", "renderer": "vray_cpu"},
   {"name": "14_evermotion.max", "status": "active", "renderer": "vray_cpu"},
   {"name": "15_evermotion.max", "status": "ERROR", "renderer": "vray_cpu"},
   {"name": "16_evermotion.max", "status": "active", "renderer": "vray_cpu"},
