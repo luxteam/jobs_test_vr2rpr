@@ -13,7 +13,7 @@
   {"name": "12_ies.max", "status": "", "renderer": "vray_cpu"},
   {"name": "13_fast_sss.max", "status": "active", "renderer": "vray_cpu"},
   {"name": "14_evermotion.max", "status": "active", "renderer": "vray_cpu"},
-  {"name": "15_evermotion.max", "status": "active", "renderer": "vray_gpu"},
+  {"name": "15_evermotion.max", "status": "active", "renderer": "vray_cpu"},
   {"name": "16_evermotion.max", "status": "active", "renderer": "vray_cpu"},
   {"name": "17_evermotion.max", "status": "active", "renderer": "vray_cpu"},
   {"name": "17_evermotion_nobumps.max", "status": "active", "renderer": "vray_cpu"},
