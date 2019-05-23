@@ -8,7 +8,7 @@
   {"name": "07_lambo.max", "status": "active", "renderer": "vray_cpu"},
   {"name": "08_materials.max", "status": "active", "renderer": "vray_cpu"},
   {"name": "09_bump.max", "status": "active", "renderer": "vray_cpu"},
-  {"name": "10_interior.max", "status": "active", "renderer": "vray_cpu"},
+  {"name": "10_interior.max", "status": "FIXME", "renderer": "vray_cpu"},
   {"name": "11_spaceship.max", "status": "active", "renderer": "vray_cpu"},
   {"name": "12_ies.max", "status": "", "renderer": "vray_cpu"},
   {"name": "13_fast_sss.max", "status": "active", "renderer": "vray_cpu"},
